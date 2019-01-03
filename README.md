@@ -1,4 +1,5 @@
-易班thinkPHP5 SDK1.0
+易班thinkPHP5 
+绵师易班thinkphp5框架专用 SDK1.0
 --
 ### 1 构建方式
  >composer require likecy/yiban
@@ -7,6 +8,35 @@
 ~~~
 YBOpenApi::getInstance()->request($url, $param, $isPOST, $applyToken)
 ~~~
+
+##### yibanweb网站调用:
+  $api =YBOpenApi::getInstance()->init('', '', '');
+        $au  = $api->getAuthorize();
+
+        //网站接入获取access_token，未授权则跳转至授权页面
+        $info = $au->getToken();
+        if(!$info['status']) {//授权失败
+            session('token',$info['msg']);
+            echo $info['msg'];
+            die;
+        }
+
+
+
+##### yiban轻应用调用: 
+        $api =YBOpenApi::getInstance()->init('', '', '');
+        $iapp  = $api->getIApp();
+        try {
+            //轻应用获取access_token，未授权则跳转至授权页面
+            $info = $iapp->perform();
+        } catch (YBException $ex) {
+            echo $ex->getMessage();
+        }   
+        $token = $info['visit_oauth']['access_token'];//轻应用获取的token
+        $api->bind($token);
+        $yibanuser = $api->request('user/real_me');
+        var_dump($yibanuser['info']);
+
 ##### 来调用易班api参数说明：
  > $url  String	具体调用的接口名称,例如user/me
  
