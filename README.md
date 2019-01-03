@@ -9,7 +9,7 @@ YBOpenApi::getInstance()->request($url, $param, $isPOST, $applyToken)
 ~~~
 
 ##### yibanweb网站调用:
-  $api =YBOpenApi::getInstance()->init('', '', '');
+        $api =YBOpenApi::getInstance()->init('', '', '');
         $au  = $api->getAuthorize();
 
         //网站接入获取access_token，未授权则跳转至授权页面
