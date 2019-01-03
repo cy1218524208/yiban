@@ -1,4 +1,3 @@
-易班thinkPHP5 
 绵师易班thinkphp5框架专用 SDK1.0
 --
 ### 1 构建方式
